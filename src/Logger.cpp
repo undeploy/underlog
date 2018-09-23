@@ -1,5 +1,4 @@
 #include "Logger.h"
-#include "Arduino.h"
 
 Logger::Logger(Print *printer, Level level) {
     this->printer = printer;

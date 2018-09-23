@@ -4,7 +4,9 @@
 
 #ifndef UNDERLOG_LOGGER_H
 #define UNDERLOG_LOGGER_H
+
 #include <Print.h>
+#include "Arduino.h"
 
 enum Level{DEBUG=3, INFO=2, WARNING=1, ERROR=0};
 
