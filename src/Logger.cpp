@@ -7,54 +7,64 @@ Logger::Logger(Print *printer, Level level) {
 }
 
 void Logger::log(const char *message) {
-    Serial.println(message);
+    this->printer->println(message);
 }
 
 template<typename T, typename... Any>
 void Logger::log(const char *message, T value, Any... arguments) // recursive variadic function
 {
-    for (int i = 0; *message != '\0'; message++) {
-        if (*message == '{' && (message[i + 1]) == '}') {
-            Serial.print(value);
+    while(*message != '\0') {
+        if (message[0] == '{' && (message[1]) == '}') {
+            this->printer->print(value);
             log(message + 2, arguments...); // recursive call
             return;
         }
-        Serial.print(*message);
+        this->printer->print(*message);
+        message++;
     }
+    this->printer->println();
 }
 
 template<typename... Any>
 void Logger::debug(const char *message, Any... arguments) {
-    this->log(message, arguments...);
+    if(this->level >= DEBUG) {
+        this->log(message, arguments...);
+    }
 };
 
 void Logger::debug(const char *message) {
-    this->log(message);
+    this->debug(message, '\0');
 };
 
 template<typename... Any>
 void Logger::info(const char *message, Any... arguments) {
-    this->log(message, arguments...);
+    if(this->level >= INFO) {
+        this->log(message, arguments...);
+    }
 };
 
 void Logger::info(const char *message) {
-    this->log(message);
+    this->info(message, '\0');
 };
 
 template<typename... Any>
 void Logger::warning(const char *message, Any... arguments) {
-    this->log(message, arguments...);
+    if(this->level >= WARNING) {
+        this->log(message, arguments...);
+    }
 };
 
 void Logger::warning(const char *message) {
-    this->log(message);
+    this->warning(message, '\0');
 };
 
 template<typename... Any>
 void Logger::error(const char *message, Any... arguments) {
-    this->log(message, arguments...);
+    if(this->level >= ERROR) {
+        this->log(message, arguments...);
+    }
 };
 
 void Logger::error(const char *message) {
-    this->log(message);
+    this->error(message, '\0');
 };

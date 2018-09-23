@@ -6,7 +6,7 @@
 #define UNDERLOG_LOGGER_H
 #include <Print.h>
 
-enum Level{DEBUG, INFO, WARNING, ERROR};
+enum Level{DEBUG=3, INFO=2, WARNING=1, ERROR=0};
 
 class Logger {
 
@@ -17,7 +17,6 @@ private:
 
     Print *printer;
     Level level;
-
 public:
     Logger(Print *printer, Level level);
 
@@ -37,6 +36,5 @@ public:
     void error(const char* message, Any... args);
     void error(const char* message);
 };
-
 
 #endif //UNDERLOG_LOGGER_H
