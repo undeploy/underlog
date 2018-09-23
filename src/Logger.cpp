@@ -58,14 +58,3 @@ void Logger::error(const char *message, Any... arguments) {
 void Logger::error(const char *message) {
     this->log(message);
 };
-
-Logger logger(&Serial, INFO);
-
-void setup(){
-    Serial.begin(115200);
-}
-
-void loop(){
-    logger.info("{} Teste {} {}", "Ola", 1, random(13));
-    delay(1000);
-}
