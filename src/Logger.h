@@ -37,6 +37,9 @@ public:
     template<typename... Any>
     void error(const char* message, Any... args);
     void error(const char* message);
+
+    Level getLevel();
+    void setLevel(Level level);
 };
 
 #endif //UNDERLOG_LOGGER_H

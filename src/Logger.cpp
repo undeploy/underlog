@@ -5,6 +5,14 @@ Logger::Logger(Print *printer, Level level) {
     this->level = level;
 }
 
+Level Logger::getLevel() {
+    return this->level;
+}
+
+void Logger::setLevel(Level level){
+    this->level = level;
+}
+
 void Logger::log(const char *message) {
     this->printer->println(message);
 }
